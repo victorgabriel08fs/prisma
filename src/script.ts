@@ -12,7 +12,21 @@ async function main() {
   console.log(user)
 }
 
-main()
+async function all() {
+  const users = await prisma.user.findMany()
+  console.log(users)
+}
+
+async function find(id: number) {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: id
+    }
+  });
+  console.log(user);
+}
+
+find(2)
   .then(async () => {
     await prisma.$disconnect()
   })
